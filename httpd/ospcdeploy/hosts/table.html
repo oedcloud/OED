@@ -1,0 +1,29 @@
+    <table>  
+      
+    <tr>  
+      {% for column in table.columns %}  
+      <th>  
+        {% if column.sortable %}  
+          <td><a href="?sort={{ column.name_toggled }}"> {{ column }}</a>
+          {% if column.is_ordered_reverse %}  
+            <img src="up.png" />  
+          {% else %}  
+            <img src="down.png" />  
+          {% endif %}
+          <td>  
+        {% else %}  
+          <td>{{ column }}<td>  
+        {% endif %}  
+      </th>  
+      {% endfor %}  
+    </tr>  
+      
+    {% for row in table.rows %}  
+      <tr>  
+      {% for value in row %}  
+        <td>{{ value }}<td>  
+      {% endfor %}
+      </tr>  
+    {% endfor %}  
+      
+    </table>  

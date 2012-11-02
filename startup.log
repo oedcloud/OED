@@ -1,0 +1,26 @@
+Pxeserver start up on Sat Nov 3 00:38:45 CST 2012
+ * Running /etc/init.d/networking restart is deprecated because it may not enable again some interfaces
+ * Reconfiguring network interfaces...
+Failed to bring up eth1.
+   ...done.
+ * Restarting DNS forwarder and DHCP server dnsmasq
+   ...done.
+Rather than invoking init scripts through /etc/init.d, use the service(8)
+utility, e.g. service xinetd restart
+
+Since the script you are attempting to invoke has been converted to an
+Upstart job, you may also use the stop(8) and then start(8) utilities,
+e.g. stop xinetd ; start xinetd. The restart(8) utility is also available.
+xinetd stop/waiting
+xinetd start/running, process 1812
+ * Restarting web server apache2
+ ... waiting .....   ...done.
+ * Restarting puppet master
+   ...done.
+ * Stopping NTP server ntpd
+   ...done.
+ * Starting NTP server ntpd
+   ...done.
+
+If no error occurs, you can enter the ospcdeploy home page through the link http://pxeserver/ospcdeploy/ospcdeploy now.
+

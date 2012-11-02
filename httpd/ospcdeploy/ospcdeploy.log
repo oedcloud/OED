@@ -1,0 +1,742 @@
+2012-10-11 22:12:34,496 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-11 22:12:35,310 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-11 22:12:35,504 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-11 22:12:36,848 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 22:12:36,850 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 22:12:37,020 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 22:12:37,022 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 22:12:57,670 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 22:12:57,676 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 22:12:57,870 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 22:12:57,875 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 22:12:58,373 INFO views.ospcdeploy To configure localrc and localnc.
+[2012-10-11 22:16:57,698: ERROR/MainProcess] Consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/worker/consumer.py", line 338, in start
+    self.consume_messages()
+  File "/usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/worker/consumer.py", line 354, in consume_messages
+    self.connection.drain_events(timeout=1)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/connection.py", line 198, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 261, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 93, in drain_events
+    return self.wait_multi(self.channels.values(), timeout=timeout)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 118, in wait_multi
+    return amqp_method(channel, args)
+  File "/usr/lib/python2.7/dist-packages/amqplib/client_0_8/connection.py", line 380, in _close
+    raise AMQPConnectionException(reply_code, reply_text, (class_id, method_id))
+AMQPConnectionException: (320, u"CONNECTION_FORCED - broker forced connection closure with reason 'shutdown'", (0, 0), '')
+[2012-10-11 22:16:57,755: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 2 seconds...
+[2012-10-11 22:16:59,758: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 4 seconds...
+[2012-10-11 22:17:03,762: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 6 seconds...
+[2012-10-11 22:17:09,768: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 8 seconds...
+[2012-10-11 22:17:17,238: INFO/PoolWorker-9] child process calling self.run()
+[2012-10-11 22:17:17,241: INFO/PoolWorker-10] child process calling self.run()
+[2012-10-11 22:17:17,247: INFO/PoolWorker-11] child process calling self.run()
+[2012-10-11 22:17:17,249: INFO/PoolWorker-12] child process calling self.run()
+[2012-10-11 22:17:17,253: INFO/PoolWorker-14] child process calling self.run()
+[2012-10-11 22:17:17,257: INFO/PoolWorker-15] child process calling self.run()
+[2012-10-11 22:17:17,257: INFO/PoolWorker-13] child process calling self.run()
+[2012-10-11 22:17:17,261: INFO/PoolWorker-16] child process calling self.run()
+[2012-10-11 22:17:20,397: WARNING/MainProcess] celeryd: Warm shutdown (MainProcess)
+[2012-10-11 22:17:21,289: INFO/PoolWorker-11] process shutting down
+[2012-10-11 22:17:21,289: INFO/PoolWorker-10] process shutting down
+[2012-10-11 22:17:21,290: INFO/PoolWorker-11] process exiting with exitcode 0
+[2012-10-11 22:17:21,290: INFO/PoolWorker-10] process exiting with exitcode 0
+[2012-10-11 22:17:21,293: INFO/PoolWorker-9] process shutting down
+[2012-10-11 22:17:21,293: INFO/PoolWorker-15] process shutting down
+[2012-10-11 22:17:21,294: INFO/PoolWorker-9] process exiting with exitcode 0
+[2012-10-11 22:17:21,294: INFO/PoolWorker-15] process exiting with exitcode 0
+[2012-10-11 22:17:21,297: INFO/PoolWorker-12] process shutting down
+[2012-10-11 22:17:21,297: INFO/PoolWorker-13] process shutting down
+[2012-10-11 22:17:21,297: INFO/PoolWorker-12] process exiting with exitcode 0
+[2012-10-11 22:17:21,299: INFO/PoolWorker-16] process shutting down
+[2012-10-11 22:17:21,299: INFO/PoolWorker-16] process exiting with exitcode 0
+[2012-10-11 22:17:21,301: INFO/PoolWorker-14] process shutting down
+[2012-10-11 22:17:21,301: INFO/PoolWorker-13] process exiting with exitcode 0
+[2012-10-11 22:17:21,301: INFO/PoolWorker-14] process exiting with exitcode 0
+[2012-10-11 22:17:21,306: INFO/MainProcess] process shutting down
+[2012-10-11 23:22:53,321: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-10-11 23:22:58,465: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-10-11 23:22:58,540: INFO/PoolWorker-2] child process calling self.run()
+[2012-10-11 23:22:58,543: INFO/PoolWorker-1] child process calling self.run()
+[2012-10-11 23:22:58,546: INFO/PoolWorker-3] child process calling self.run()
+[2012-10-11 23:22:58,549: INFO/PoolWorker-4] child process calling self.run()
+[2012-10-11 23:22:58,554: INFO/PoolWorker-5] child process calling self.run()
+[2012-10-11 23:22:58,552: INFO/PoolWorker-6] child process calling self.run()
+[2012-10-11 23:22:58,564: INFO/PoolWorker-7] child process calling self.run()
+[2012-10-11 23:22:58,562: INFO/PoolWorker-8] child process calling self.run()
+[2012-10-11 23:22:58,568: WARNING/MainProcess] celery@pxeserver.pxeserver has started.
+2012-10-11 23:35:46,634 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:35:46,646 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:35:55,564 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-11 23:35:56,461 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:35:56,467 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:35:56,910 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:35:56,915 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:35:57,133 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:35:57,139 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:35:57,700 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:35:57,706 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:36:58,869 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:36:58,871 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:36:59,110 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:36:59,115 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:36:59,310 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:36:59,312 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:37:01,333 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-11 23:37:04,834 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:37:04,839 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:37:05,100 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:37:05,105 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:37:05,382 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:37:05,384 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:37:05,573 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:37:05,578 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-11 23:39:29,533 INFO views.ospcdeploy To update the Hostform.
+2012-10-11 23:39:29,536 WARNING views.ospcdeploy Hostname doesnot exists.
+[2012-10-11 23:45:55,490: WARNING/MainProcess] celeryd: Warm shutdown (MainProcess)
+[2012-10-11 23:45:56,912: INFO/PoolWorker-6] process shutting down
+[2012-10-11 23:45:56,912: INFO/PoolWorker-7] process shutting down
+[2012-10-11 23:45:57,238: INFO/PoolWorker-7] process exiting with exitcode 0
+[2012-10-11 23:45:57,238: INFO/PoolWorker-6] process exiting with exitcode 0
+[2012-10-11 23:45:56,912: INFO/PoolWorker-5] process shutting down
+[2012-10-11 23:45:57,238: INFO/PoolWorker-5] process exiting with exitcode 0
+[2012-10-11 23:45:56,912: INFO/PoolWorker-4] process shutting down
+[2012-10-11 23:45:57,239: INFO/PoolWorker-4] process exiting with exitcode 0
+[2012-10-11 23:45:56,912: INFO/PoolWorker-2] process shutting down
+[2012-10-11 23:45:56,912: INFO/PoolWorker-8] process shutting down
+[2012-10-11 23:45:57,240: INFO/PoolWorker-2] process exiting with exitcode 0
+[2012-10-11 23:45:57,240: INFO/PoolWorker-8] process exiting with exitcode 0
+[2012-10-11 23:45:56,912: INFO/PoolWorker-3] process shutting down
+[2012-10-11 23:45:56,912: INFO/PoolWorker-1] process shutting down
+[2012-10-11 23:45:57,241: INFO/PoolWorker-1] process exiting with exitcode 0
+[2012-10-11 23:45:57,241: INFO/PoolWorker-3] process exiting with exitcode 0
+[2012-10-11 23:45:57,246: INFO/MainProcess] process shutting down
+[2012-10-11 23:45:59,904: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-10-11 23:45:59,909: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-10-11 23:45:59,969: INFO/PoolWorker-1] child process calling self.run()
+[2012-10-11 23:45:59,972: INFO/PoolWorker-3] child process calling self.run()
+[2012-10-11 23:45:59,976: INFO/PoolWorker-2] child process calling self.run()
+[2012-10-11 23:45:59,980: INFO/PoolWorker-5] child process calling self.run()
+[2012-10-11 23:45:59,980: INFO/PoolWorker-4] child process calling self.run()
+[2012-10-11 23:45:59,984: INFO/PoolWorker-6] child process calling self.run()
+[2012-10-11 23:45:59,987: INFO/PoolWorker-8] child process calling self.run()
+[2012-10-11 23:45:59,987: INFO/PoolWorker-7] child process calling self.run()
+[2012-10-11 23:45:59,990: WARNING/MainProcess] celery@pxeserver.pxeserver has started.
+[2012-10-12 00:13:06,993: WARNING/MainProcess] celeryd: Warm shutdown (MainProcess)
+[2012-10-12 00:13:08,271: INFO/PoolWorker-3] process shutting down
+[2012-10-12 00:13:08,272: INFO/PoolWorker-3] process exiting with exitcode 0
+[2012-10-12 00:13:08,272: INFO/PoolWorker-7] process shutting down
+[2012-10-12 00:13:08,272: INFO/PoolWorker-7] process exiting with exitcode 0
+[2012-10-12 00:13:08,275: INFO/PoolWorker-4] process shutting down
+[2012-10-12 00:13:08,275: INFO/PoolWorker-5] process shutting down
+[2012-10-12 00:13:08,275: INFO/PoolWorker-4] process exiting with exitcode 0
+[2012-10-12 00:13:08,275: INFO/PoolWorker-5] process exiting with exitcode 0
+[2012-10-12 00:13:08,278: INFO/PoolWorker-6] process shutting down
+[2012-10-12 00:13:08,278: INFO/PoolWorker-2] process shutting down
+[2012-10-12 00:13:08,278: INFO/PoolWorker-6] process exiting with exitcode 0
+[2012-10-12 00:13:08,279: INFO/PoolWorker-2] process exiting with exitcode 0
+[2012-10-12 00:13:08,280: INFO/PoolWorker-8] process shutting down
+[2012-10-12 00:13:08,280: INFO/PoolWorker-1] process shutting down
+[2012-10-12 00:13:08,280: INFO/PoolWorker-8] process exiting with exitcode 0
+[2012-10-12 00:13:08,280: INFO/PoolWorker-1] process exiting with exitcode 0
+[2012-10-12 00:13:08,284: INFO/MainProcess] process shutting down
+[2012-10-12 00:13:09,407: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-10-12 00:13:09,412: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-10-12 00:13:09,465: INFO/PoolWorker-1] child process calling self.run()
+[2012-10-12 00:13:09,468: INFO/PoolWorker-2] child process calling self.run()
+[2012-10-12 00:13:09,472: INFO/PoolWorker-3] child process calling self.run()
+[2012-10-12 00:13:09,476: INFO/PoolWorker-4] child process calling self.run()
+[2012-10-12 00:13:09,478: INFO/PoolWorker-5] child process calling self.run()
+[2012-10-12 00:13:09,479: INFO/PoolWorker-6] child process calling self.run()
+[2012-10-12 00:13:09,481: INFO/PoolWorker-7] child process calling self.run()
+[2012-10-12 00:13:09,483: INFO/PoolWorker-8] child process calling self.run()
+[2012-10-12 00:13:09,486: WARNING/MainProcess] celery@pxeserver.pxeserver has started.
+[2012-10-12 00:13:56,341: WARNING/MainProcess] celeryd: Warm shutdown (MainProcess)
+[2012-10-12 00:13:56,738: INFO/PoolWorker-5] process shutting down
+[2012-10-12 00:13:56,739: INFO/PoolWorker-5] process exiting with exitcode 0
+[2012-10-12 00:13:56,739: INFO/PoolWorker-6] process shutting down
+[2012-10-12 00:13:56,740: INFO/PoolWorker-7] process shutting down
+[2012-10-12 00:13:56,740: INFO/PoolWorker-4] process shutting down
+[2012-10-12 00:13:56,740: INFO/PoolWorker-7] process exiting with exitcode 0
+[2012-10-12 00:13:56,740: INFO/PoolWorker-4] process exiting with exitcode 0
+[2012-10-12 00:13:56,743: INFO/PoolWorker-3] process shutting down
+[2012-10-12 00:13:56,743: INFO/PoolWorker-1] process shutting down
+[2012-10-12 00:13:56,744: INFO/PoolWorker-3] process exiting with exitcode 0
+[2012-10-12 00:13:56,744: INFO/PoolWorker-1] process exiting with exitcode 0
+[2012-10-12 00:13:56,746: INFO/PoolWorker-8] process shutting down
+[2012-10-12 00:13:56,746: INFO/PoolWorker-2] process shutting down
+[2012-10-12 00:13:56,747: INFO/PoolWorker-8] process exiting with exitcode 0
+[2012-10-12 00:13:56,747: INFO/PoolWorker-2] process exiting with exitcode 0
+[2012-10-12 00:13:56,739: INFO/PoolWorker-6] process exiting with exitcode 0
+[2012-10-12 00:13:56,752: INFO/MainProcess] process shutting down
+[2012-10-12 00:13:58,764: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-10-12 00:13:58,769: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-10-12 00:13:58,821: INFO/PoolWorker-1] child process calling self.run()
+[2012-10-12 00:13:58,824: INFO/PoolWorker-2] child process calling self.run()
+[2012-10-12 00:13:58,828: INFO/PoolWorker-3] child process calling self.run()
+[2012-10-12 00:13:58,832: INFO/PoolWorker-5] child process calling self.run()
+[2012-10-12 00:13:58,832: INFO/PoolWorker-4] child process calling self.run()
+[2012-10-12 00:13:58,836: INFO/PoolWorker-7] child process calling self.run()
+[2012-10-12 00:13:58,839: INFO/PoolWorker-6] child process calling self.run()
+[2012-10-12 00:13:58,839: INFO/PoolWorker-8] child process calling self.run()
+[2012-10-12 00:13:58,843: WARNING/MainProcess] celery@pxeserver.pxeserver has started.
+2012-10-12 00:33:50,644 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 00:33:51,932 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 00:33:52,142 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 00:33:53,561 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:33:53,566 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:33:54,205 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:33:54,211 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:33:54,369 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:33:54,372 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:33:54,829 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 00:33:55,053 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 00:33:55,238 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 00:33:56,597 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 00:33:58,148 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 00:45:13,757 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:45:13,762 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:45:13,958 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:45:13,963 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:45:18,017 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:45:18,022 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:45:23,121 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:45:23,128 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:45:28,155 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:45:28,156 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:45:45,474 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:45:45,477 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:45:48,078 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:45:48,080 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:46:04,286 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:46:04,288 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 00:46:18,142 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 00:46:18,144 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 17:36:15,690 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 17:36:15,695 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 17:51:40,556 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 17:51:40,561 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 17:52:39,887 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 17:52:39,889 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 17:52:47,926 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 17:52:47,931 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 17:53:14,763 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 17:53:16,997 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 17:53:16,999 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 18:16:33,774 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:16:33,776 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 18:17:03,232 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:17:03,234 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 18:30:12,053 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:30:12,055 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 18:30:32,207 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 18:31:18,923 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:31:18,925 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 18:31:24,031 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:31:24,035 INFO views.ospcdeploy Hosts has been updated.
+2012-10-12 18:31:32,755 INFO views.ospcdeploy To deploy compute node nova20
+2012-10-12 18:31:32,755 INFO views.ospcdeploy Begin deploy compute node nova20
+2012-10-12 18:31:32,757 ERROR views.ospcdeploy The config file localrc does not exists, plz generate the config file first.
+2012-10-12 18:31:48,520 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-12 18:31:48,523 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-12 18:31:48,523 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-12 18:32:16,791 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:32:23,387 INFO views.ospcdeploy To deploy compute node nova20
+2012-10-12 18:32:23,388 INFO views.ospcdeploy Begin deploy compute node nova20
+2012-10-12 18:32:23,389 INFO views.ospcdeploy CC host nova20
+2012-10-12 18:32:24,248 INFO views.ospcdeploy single task triggered.
+[2012-10-12 18:32:24,249: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.deploy[bcc17161-9a12-414b-952b-e8c3c3ee0ab0]
+[2012-10-12 18:32:24,253: INFO/PoolWorker-1] copy config files... 
+[2012-10-12 18:32:24,253: INFO/PoolWorker-1] add node cc to deploy.pp
+[2012-10-12 18:32:24,259: INFO/PoolWorker-1] <subprocess.Popen object at 0x1dca550>
+[2012-10-12 18:32:24,269: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.puppet_run[9284ee98-aa67-4623-abe3-a4d0fae905eb]
+[2012-10-12 18:32:24,326: INFO/PoolWorker-4] uid=0(root) gid=0(root) groups=0(root)
+
+[2012-10-12 18:32:24,326: INFO/PoolWorker-4] puppetrun to client host nova20
+[2012-10-12 18:32:24,327: INFO/PoolWorker-4] sudo /usr/sbin/puppetrun -p 10 --debug --host nova20.sh.intel.com
+[2012-10-12 18:32:26,025: INFO/PoolWorker-4] Triggering nova20.sh.intel.com
+nova20.sh.intel.com finished with exit code 2
+Failed: nova20.sh.intel.com
+
+[2012-10-12 18:32:26,026: INFO/MainProcess] Task ospcdeploy.hosts.tasks.puppet_run[9284ee98-aa67-4623-abe3-a4d0fae905eb] succeeded in 1.71016097069s: None
+2012-10-12 18:32:36,890 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 18:32:36,893 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-12 18:32:36,893 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-12 18:32:45,403 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:32:56,066 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:32:56,069 INFO views.ospcdeploy Hosts has been updated.
+2012-10-12 18:33:00,511 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-12 18:33:00,512 ERROR views.ospcdeploy CC doesnot exists.
+2012-10-12 18:33:05,393 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 18:33:11,515 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 18:33:13,182 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 18:33:14,425 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:33:14,427 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 18:33:15,767 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 18:33:18,385 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:33:18,514 WARNING views.ospcdeploy Hostname doesnot exists.
+2012-10-12 18:33:24,366 INFO views.ospcdeploy To update the Hostform.
+2012-10-12 18:33:24,369 INFO views.ospcdeploy Hosts has been updated.
+2012-10-12 18:33:30,371 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 18:33:31,049 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-12 18:33:31,049 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-12 18:33:39,004 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-12 18:33:41,054 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-12 18:33:41,055 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-12 18:33:47,527 INFO views.ospcdeploy To deploy compute node nova20
+2012-10-12 18:33:47,527 INFO views.ospcdeploy Begin deploy compute node nova20
+2012-10-12 18:33:47,529 INFO views.ospcdeploy CC host nova20
+2012-10-12 18:33:47,545 INFO views.ospcdeploy single task triggered.
+[2012-10-12 18:33:47,545: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.deploy[f8ec5b72-86a9-46e1-a67d-607360924933]
+[2012-10-12 18:33:47,555: INFO/PoolWorker-6] copy config files... 
+[2012-10-12 18:33:47,555: INFO/PoolWorker-6] add node cc to deploy.pp
+[2012-10-12 18:33:47,569: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.puppet_run[d08a9d21-1d1a-4ec7-b97e-a164508447cc]
+[2012-10-12 18:33:47,584: INFO/PoolWorker-7] uid=0(root) gid=0(root) groups=0(root)
+
+[2012-10-12 18:33:47,585: INFO/PoolWorker-7] puppetrun to client host nova20
+[2012-10-12 18:33:47,585: INFO/PoolWorker-7] sudo /usr/sbin/puppetrun -p 10 --debug --host nova20.sh.intel.com
+[2012-10-12 18:33:48,225: INFO/PoolWorker-7] Triggering nova20.sh.intel.com
+nova20.sh.intel.com finished with exit code 2
+Failed: nova20.sh.intel.com
+
+[2012-10-12 18:33:48,226: INFO/MainProcess] Task ospcdeploy.hosts.tasks.puppet_run[d08a9d21-1d1a-4ec7-b97e-a164508447cc] succeeded in 0.64802980423s: None
+[2012-10-12 18:36:34,372: INFO/PoolWorker-1] failed to deploy cc on host nova20 
+[2012-10-12 18:36:34,372: INFO/MainProcess] Task ospcdeploy.hosts.tasks.deploy[bcc17161-9a12-414b-952b-e8c3c3ee0ab0] succeeded in 250.120384932s: None
+2012-10-12 18:36:53,938 INFO views.ospcdeploy To deploy compute node nova20
+2012-10-12 18:36:53,938 INFO views.ospcdeploy Begin deploy compute node nova20
+2012-10-12 18:36:53,940 INFO views.ospcdeploy CC host nova20
+2012-10-12 18:36:53,942 INFO views.ospcdeploy single task triggered.
+[2012-10-12 18:36:53,942: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.deploy[c9753e72-0b80-41c0-a26f-e5bc14c9ec1c]
+[2012-10-12 18:36:53,955: INFO/PoolWorker-8] copy config files... 
+[2012-10-12 18:36:53,955: INFO/PoolWorker-8] add node cc to deploy.pp
+[2012-10-12 18:36:53,964: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.puppet_run[ff51bd4c-4a7c-4e9f-8d28-42639de4b10d]
+[2012-10-12 18:36:53,975: INFO/PoolWorker-2] uid=0(root) gid=0(root) groups=0(root)
+
+[2012-10-12 18:36:53,976: INFO/PoolWorker-2] puppetrun to client host nova20
+[2012-10-12 18:36:53,976: INFO/PoolWorker-2] sudo /usr/sbin/puppetrun -p 10 --debug --host nova20.sh.intel.com
+[2012-10-12 18:36:54,621: INFO/PoolWorker-2] Triggering nova20.sh.intel.com
+nova20.sh.intel.com finished with exit code 2
+Failed: nova20.sh.intel.com
+
+[2012-10-12 18:36:54,622: INFO/MainProcess] Task ospcdeploy.hosts.tasks.puppet_run[ff51bd4c-4a7c-4e9f-8d28-42639de4b10d] succeeded in 0.651831150055s: None
+[2012-10-12 18:37:57,655: INFO/PoolWorker-6] failed to deploy cc on host nova20 
+[2012-10-12 18:37:57,656: INFO/MainProcess] Task ospcdeploy.hosts.tasks.deploy[f8ec5b72-86a9-46e1-a67d-607360924933] succeeded in 250.101526976s: None
+[2012-10-12 18:41:04,051: INFO/PoolWorker-8] failed to deploy cc on host nova20 
+[2012-10-12 18:41:04,052: INFO/MainProcess] Task ospcdeploy.hosts.tasks.deploy[c9753e72-0b80-41c0-a26f-e5bc14c9ec1c] succeeded in 250.097676992s: None
+2012-10-12 18:42:51,103 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-12 18:42:51,106 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-12 18:42:51,106 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-12 18:43:05,585 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-12 18:43:05,588 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-12 18:43:05,588 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-12 18:43:21,057 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-12 18:43:21,060 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-12 18:43:21,060 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-12 18:43:22,291 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-12 18:43:22,294 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-12 18:43:22,294 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+[2012-10-12 19:03:48,898: ERROR/MainProcess] Consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/worker/consumer.py", line 338, in start
+    self.consume_messages()
+  File "/usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/worker/consumer.py", line 354, in consume_messages
+    self.connection.drain_events(timeout=1)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/connection.py", line 198, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 261, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 93, in drain_events
+    return self.wait_multi(self.channels.values(), timeout=timeout)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 118, in wait_multi
+    return amqp_method(channel, args)
+  File "/usr/lib/python2.7/dist-packages/amqplib/client_0_8/connection.py", line 380, in _close
+    raise AMQPConnectionException(reply_code, reply_text, (class_id, method_id))
+AMQPConnectionException: (320, u"CONNECTION_FORCED - broker forced connection closure with reason 'shutdown'", (0, 0), '')
+[2012-10-12 19:03:48,932: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 2 seconds...
+[2012-10-12 19:03:50,934: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 4 seconds...
+[2012-10-12 19:03:54,936: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 6 seconds...
+[2012-10-12 19:04:13,360: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 8 seconds...
+[2012-10-12 19:04:20,837: INFO/PoolWorker-10] child process calling self.run()
+[2012-10-12 19:04:20,837: INFO/PoolWorker-9] child process calling self.run()
+[2012-10-12 19:04:20,840: INFO/PoolWorker-12] child process calling self.run()
+[2012-10-12 19:04:20,841: INFO/PoolWorker-13] child process calling self.run()
+[2012-10-12 19:04:20,844: INFO/PoolWorker-15] child process calling self.run()
+[2012-10-12 19:04:20,844: INFO/PoolWorker-11] child process calling self.run()
+[2012-10-12 19:04:20,847: INFO/PoolWorker-14] child process calling self.run()
+[2012-10-12 19:04:20,849: INFO/PoolWorker-16] child process calling self.run()
+[2012-10-12 19:04:27,428: WARNING/MainProcess] celeryd: Warm shutdown (MainProcess)
+[2012-10-12 19:04:27,873: INFO/PoolWorker-13] process shutting down
+[2012-10-12 19:04:27,873: INFO/PoolWorker-15] process shutting down
+[2012-10-12 19:04:27,873: INFO/PoolWorker-13] process exiting with exitcode 0
+[2012-10-12 19:04:28,029: INFO/PoolWorker-15] process exiting with exitcode 0
+[2012-10-12 19:04:27,874: INFO/PoolWorker-11] process shutting down
+[2012-10-12 19:04:27,874: INFO/PoolWorker-10] process shutting down
+[2012-10-12 19:04:28,030: INFO/PoolWorker-10] process exiting with exitcode 0
+[2012-10-12 19:04:28,030: INFO/PoolWorker-11] process exiting with exitcode 0
+[2012-10-12 19:04:27,875: INFO/PoolWorker-9] process shutting down
+[2012-10-12 19:04:27,874: INFO/PoolWorker-12] process shutting down
+[2012-10-12 19:04:28,031: INFO/PoolWorker-9] process exiting with exitcode 0
+[2012-10-12 19:04:28,031: INFO/PoolWorker-12] process exiting with exitcode 0
+[2012-10-12 19:04:27,875: INFO/PoolWorker-14] process shutting down
+[2012-10-12 19:04:27,875: INFO/PoolWorker-16] process shutting down
+[2012-10-12 19:04:28,034: INFO/PoolWorker-14] process exiting with exitcode 0
+[2012-10-12 19:04:28,034: INFO/PoolWorker-16] process exiting with exitcode 0
+[2012-10-12 19:04:28,038: INFO/MainProcess] process shutting down
+[2012-10-20 21:34:04,689: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-10-20 21:34:04,694: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-10-20 21:34:04,733: INFO/PoolWorker-1] child process calling self.run()
+[2012-10-20 21:34:04,736: INFO/PoolWorker-2] child process calling self.run()
+[2012-10-20 21:34:04,736: INFO/PoolWorker-3] child process calling self.run()
+[2012-10-20 21:34:04,739: INFO/PoolWorker-4] child process calling self.run()
+[2012-10-20 21:34:04,740: INFO/PoolWorker-5] child process calling self.run()
+[2012-10-20 21:34:04,742: INFO/PoolWorker-6] child process calling self.run()
+[2012-10-20 21:34:04,744: INFO/PoolWorker-7] child process calling self.run()
+[2012-10-20 21:34:04,747: WARNING/MainProcess] celery@pxeserver.pxeserver has started.
+[2012-10-20 21:34:04,747: INFO/PoolWorker-8] child process calling self.run()
+2012-10-20 21:44:29,353 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-20 21:44:29,358 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-20 21:44:29,358 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+[2012-10-20 21:57:47,145: WARNING/MainProcess] celeryd: Warm shutdown (MainProcess)
+[2012-10-20 21:57:47,953: INFO/PoolWorker-1] process shutting down
+[2012-10-20 21:57:47,953: INFO/PoolWorker-7] process shutting down
+[2012-10-20 21:57:47,954: INFO/PoolWorker-2] process shutting down
+[2012-10-20 21:57:47,954: INFO/PoolWorker-3] process shutting down
+[2012-10-20 21:57:47,954: INFO/PoolWorker-1] process exiting with exitcode 0
+[2012-10-20 21:57:47,954: INFO/PoolWorker-2] process exiting with exitcode 0
+[2012-10-20 21:57:47,954: INFO/PoolWorker-7] process exiting with exitcode 0
+[2012-10-20 21:57:47,954: INFO/PoolWorker-3] process exiting with exitcode 0
+[2012-10-20 21:57:47,955: INFO/PoolWorker-8] process shutting down
+[2012-10-20 21:57:47,956: INFO/PoolWorker-8] process exiting with exitcode 0
+[2012-10-20 21:57:47,958: INFO/PoolWorker-4] process shutting down
+[2012-10-20 21:57:47,958: INFO/PoolWorker-6] process shutting down
+[2012-10-20 21:57:47,958: INFO/PoolWorker-4] process exiting with exitcode 0
+[2012-10-20 21:57:47,958: INFO/PoolWorker-6] process exiting with exitcode 0
+[2012-10-20 21:57:47,959: INFO/PoolWorker-5] process shutting down
+[2012-10-20 21:57:47,959: INFO/PoolWorker-5] process exiting with exitcode 0
+[2012-10-20 21:57:47,963: INFO/MainProcess] process shutting down
+[2012-10-20 21:57:49,542: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-10-20 21:57:49,545: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-10-20 21:57:49,589: INFO/PoolWorker-1] child process calling self.run()
+[2012-10-20 21:57:49,592: INFO/PoolWorker-2] child process calling self.run()
+[2012-10-20 21:57:49,596: INFO/PoolWorker-3] child process calling self.run()
+[2012-10-20 21:57:49,596: INFO/PoolWorker-4] child process calling self.run()
+[2012-10-20 21:57:49,599: INFO/PoolWorker-5] child process calling self.run()
+[2012-10-20 21:57:49,599: INFO/PoolWorker-6] child process calling self.run()
+[2012-10-20 21:57:49,601: INFO/PoolWorker-7] child process calling self.run()
+[2012-10-20 21:57:49,603: INFO/PoolWorker-8] child process calling self.run()
+[2012-10-20 21:57:49,604: WARNING/MainProcess] celery@pxeserver.pxeserver has started.
+2012-10-20 22:16:40,098 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-20 22:16:40,108 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-20 22:16:40,108 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-20 22:17:01,065 INFO views.ospcdeploy To delete the certain host in table.
+2012-10-20 22:17:11,708 INFO views.ospcdeploy trigger puppetca clean nova20
+[2012-10-20 22:17:11,717: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.puppet_clean[4260b5c8-66da-4a03-9871-5ff23904a756]
+[2012-10-20 22:17:11,737: INFO/PoolWorker-8] About to run puppetca clean nova20
+[2012-10-20 22:17:11,738: INFO/PoolWorker-8] sudo /usr/sbin/puppetca clean nova20.sh.intel.com
+[2012-10-20 22:17:13,013: INFO/PoolWorker-8] [0;36mnotice: Revoked certificate with serial 37[0m
+
+[2012-10-20 22:17:13,014: INFO/MainProcess] Task ospcdeploy.hosts.tasks.puppet_clean[4260b5c8-66da-4a03-9871-5ff23904a756] succeeded in 1.27710604668s: None
+2012-10-20 22:26:05,883 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-20 22:26:05,889 ERROR views.ospcdeploy CC doesnot exists.
+2012-10-20 22:26:11,241 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-20 22:26:27,242 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-20 22:26:27,247 ERROR views.ospcdeploy CC doesnot exists.
+2012-10-20 22:26:35,525 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-20 22:26:42,817 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-20 22:26:42,821 ERROR views.ospcdeploy CC doesnot exists.
+2012-10-20 22:27:02,151 INFO views.ospcdeploy To update the Hostform.
+2012-10-20 22:27:02,153 INFO views.ospcdeploy Hosts has been updated.
+2012-10-20 22:27:07,537 INFO views.ospcdeploy To configure localrc and localnc for single host.
+2012-10-20 22:27:07,539 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-20 22:27:07,539 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-20 22:27:58,521 INFO views.ospcdeploy To deploy compute node nova20
+2012-10-20 22:27:58,521 INFO views.ospcdeploy Begin deploy compute node nova20
+2012-10-20 22:27:58,522 INFO views.ospcdeploy CC host nova20
+2012-10-20 22:27:58,538 INFO views.ospcdeploy single task triggered.
+[2012-10-20 22:27:58,545: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.deploy[2d236156-e40e-4694-9bf9-d006f71816da]
+[2012-10-20 22:27:58,585: INFO/PoolWorker-4] copy config files... 
+[2012-10-20 22:27:58,585: INFO/PoolWorker-4] add node cc to deploy.pp
+[2012-10-20 22:27:58,599: INFO/MainProcess] Got task from broker: ospcdeploy.hosts.tasks.puppet_run[3c6ae94e-dc53-4771-8eee-4af2cecc655c]
+[2012-10-20 22:27:58,617: INFO/PoolWorker-2] uid=0(root) gid=0(root) groups=0(root)
+
+[2012-10-20 22:27:58,618: INFO/PoolWorker-2] puppetrun to client host nova20
+[2012-10-20 22:27:58,618: INFO/PoolWorker-2] sudo /usr/sbin/puppetrun -p 10 --debug --host nova20.sh.intel.com
+[2012-10-20 22:28:00,317: INFO/PoolWorker-2] Triggering nova20.sh.intel.com
+Getting status
+status is success
+nova20.sh.intel.com finished with exit code 0
+Finished
+
+[2012-10-20 22:28:00,318: INFO/MainProcess] Task ospcdeploy.hosts.tasks.puppet_run[3c6ae94e-dc53-4771-8eee-4af2cecc655c] succeeded in 1.70501589775s: None
+[2012-10-20 22:32:08,668: INFO/PoolWorker-4] failed to deploy cc on host nova20 
+[2012-10-20 22:32:08,669: INFO/MainProcess] Task ospcdeploy.hosts.tasks.deploy[2d236156-e40e-4694-9bf9-d006f71816da] succeeded in 250.085647106s: None
+[2012-10-24 20:09:40,302: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-10-24 20:09:40,829: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-10-24 20:09:40,870: INFO/PoolWorker-1] child process calling self.run()
+[2012-10-24 20:09:40,872: INFO/PoolWorker-2] child process calling self.run()
+[2012-10-24 20:09:40,873: INFO/PoolWorker-3] child process calling self.run()
+[2012-10-24 20:09:40,875: INFO/PoolWorker-4] child process calling self.run()
+[2012-10-24 20:09:40,877: INFO/PoolWorker-5] child process calling self.run()
+[2012-10-24 20:09:40,880: INFO/PoolWorker-6] child process calling self.run()
+[2012-10-24 20:09:40,883: INFO/PoolWorker-7] child process calling self.run()
+[2012-10-24 20:09:40,885: INFO/PoolWorker-8] child process calling self.run()
+[2012-10-24 20:09:40,888: WARNING/MainProcess] celery@pxeserver.pxeserver has started.
+[2012-10-24 20:21:07,286: WARNING/MainProcess] celeryd: Warm shutdown (MainProcess)
+[2012-10-24 20:21:08,866: INFO/PoolWorker-1] process shutting down
+[2012-10-24 20:21:08,866: INFO/PoolWorker-2] process shutting down
+[2012-10-24 20:21:08,867: INFO/PoolWorker-5] process shutting down
+[2012-10-24 20:21:08,867: INFO/PoolWorker-3] process shutting down
+[2012-10-24 20:21:09,853: INFO/PoolWorker-2] process exiting with exitcode 0
+[2012-10-24 20:21:09,853: INFO/PoolWorker-5] process exiting with exitcode 0
+[2012-10-24 20:21:09,853: INFO/PoolWorker-1] process exiting with exitcode 0
+[2012-10-24 20:21:09,853: INFO/PoolWorker-3] process exiting with exitcode 0
+[2012-10-24 20:21:08,867: INFO/PoolWorker-4] process shutting down
+[2012-10-24 20:21:08,867: INFO/PoolWorker-6] process shutting down
+[2012-10-24 20:21:08,868: INFO/PoolWorker-7] process shutting down
+[2012-10-24 20:21:08,868: INFO/PoolWorker-8] process shutting down
+[2012-10-24 20:21:09,856: INFO/PoolWorker-6] process exiting with exitcode 0
+[2012-10-24 20:21:09,856: INFO/PoolWorker-4] process exiting with exitcode 0
+[2012-10-24 20:21:09,856: INFO/PoolWorker-7] process exiting with exitcode 0
+[2012-10-24 20:21:09,856: INFO/PoolWorker-8] process exiting with exitcode 0
+[2012-10-24 20:21:09,864: INFO/MainProcess] process shutting down
+[2012-10-24 20:21:11,696: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-10-24 20:21:11,700: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-10-24 20:21:11,755: INFO/PoolWorker-1] child process calling self.run()
+[2012-10-24 20:21:11,758: INFO/PoolWorker-3] child process calling self.run()
+[2012-10-24 20:21:11,760: INFO/PoolWorker-2] child process calling self.run()
+[2012-10-24 20:21:11,760: INFO/PoolWorker-4] child process calling self.run()
+[2012-10-24 20:21:11,764: INFO/PoolWorker-5] child process calling self.run()
+[2012-10-24 20:21:11,764: INFO/PoolWorker-6] child process calling self.run()
+[2012-10-24 20:21:11,766: INFO/PoolWorker-7] child process calling self.run()
+[2012-10-24 20:21:11,769: WARNING/MainProcess] celery@pxeserver.pxeserver has started.
+[2012-10-24 20:21:11,769: INFO/PoolWorker-8] child process calling self.run()
+2012-10-24 21:22:15,594 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-24 21:22:16,307 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-24 21:22:16,307 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+2012-10-24 21:23:04,769 INFO views.ospcdeploy To configure localrc and localnc.
+2012-10-24 21:23:04,779 INFO views.mk_dir Making directory /pxeinstall/puppet/files/nova20
+2012-10-24 21:23:04,780 INFO views.mk_dir Copy script file deploy.sh to /pxeinstall/puppet/files/nova20
+[2012-10-24 22:00:14,783: ERROR/MainProcess] Consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/worker/consumer.py", line 338, in start
+    self.consume_messages()
+  File "/usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/worker/consumer.py", line 354, in consume_messages
+    self.connection.drain_events(timeout=1)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/connection.py", line 198, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 261, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 93, in drain_events
+    return self.wait_multi(self.channels.values(), timeout=timeout)
+  File "/usr/local/lib/python2.7/dist-packages/kombu-2.1.2-py2.7.egg/kombu/transport/amqplib.py", line 118, in wait_multi
+    return amqp_method(channel, args)
+  File "/usr/lib/python2.7/dist-packages/amqplib/client_0_8/connection.py", line 380, in _close
+    raise AMQPConnectionException(reply_code, reply_text, (class_id, method_id))
+AMQPConnectionException: (320, u"CONNECTION_FORCED - broker forced connection closure with reason 'shutdown'", (0, 0), '')
+[2012-10-24 22:00:15,030: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 2 seconds...
+[2012-10-24 22:00:17,033: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 4 seconds...
+[2012-10-24 22:00:36,754: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 6 seconds...
+[2012-10-24 22:00:42,760: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 8 seconds...
+[2012-10-24 22:00:50,769: ERROR/MainProcess] Consumer: Connection Error: [Errno 111] Connection refused. Trying again in 10 seconds...
+[2012-10-24 22:00:59,344: INFO/PoolWorker-9] child process calling self.run()
+[2012-10-24 22:00:59,353: INFO/PoolWorker-11] child process calling self.run()
+[2012-10-24 22:00:59,354: INFO/PoolWorker-10] child process calling self.run()
+[2012-10-24 22:00:59,358: INFO/PoolWorker-12] child process calling self.run()
+[2012-10-24 22:00:59,360: INFO/PoolWorker-13] child process calling self.run()
+[2012-10-24 22:00:59,362: INFO/PoolWorker-14] child process calling self.run()
+[2012-10-24 22:00:59,364: INFO/PoolWorker-15] child process calling self.run()
+[2012-10-24 22:00:59,366: INFO/PoolWorker-16] child process calling self.run()
+[2012-10-24 22:01:00,793: WARNING/MainProcess] celeryd: Warm shutdown (MainProcess)
+[2012-10-24 22:01:01,782: INFO/PoolWorker-10] process shutting down
+[2012-10-24 22:01:01,782: INFO/PoolWorker-13] process shutting down
+[2012-10-24 22:01:01,782: INFO/PoolWorker-9] process shutting down
+[2012-10-24 22:01:01,782: INFO/PoolWorker-16] process shutting down
+[2012-10-24 22:01:01,783: INFO/PoolWorker-13] process exiting with exitcode 0
+[2012-10-24 22:01:01,783: INFO/PoolWorker-10] process exiting with exitcode 0
+[2012-10-24 22:01:01,783: INFO/PoolWorker-16] process exiting with exitcode 0
+[2012-10-24 22:01:01,783: INFO/PoolWorker-12] process shutting down
+[2012-10-24 22:01:01,784: INFO/PoolWorker-12] process exiting with exitcode 0
+[2012-10-24 22:01:01,787: INFO/PoolWorker-14] process shutting down
+[2012-10-24 22:01:01,787: INFO/PoolWorker-11] process shutting down
+[2012-10-24 22:01:01,787: INFO/PoolWorker-14] process exiting with exitcode 0
+[2012-10-24 22:01:01,787: INFO/PoolWorker-11] process exiting with exitcode 0
+[2012-10-24 22:01:01,783: INFO/PoolWorker-9] process exiting with exitcode 0
+[2012-10-24 22:01:01,787: INFO/PoolWorker-15] process shutting down
+[2012-10-24 22:01:01,788: INFO/PoolWorker-15] process exiting with exitcode 0
+[2012-10-24 22:01:01,789: INFO/MainProcess] process shutting down
+[2012-11-03 00:39:03,589: WARNING/MainProcess] /usr/local/lib/python2.7/dist-packages/celery-2.6.0a1-py2.7.egg/celery/apps/worker.py:136: RuntimeWarning: Running celeryd with superuser privileges is discouraged!
+  "Running celeryd with superuser privileges is discouraged!"))
+[2012-11-03 00:39:03,595: WARNING/MainProcess] -------------- celery@pxeserver.pxeserver v2.6.0a1
+---- **** -----
+--- * ***  * -- [Configuration]
+-- * - **** ---   . broker:      amqp://guest@127.0.0.1:5672//
+- ** ----------   . loader:      djcelery.loaders.DjangoLoader
+- ** ----------   . logfile:     /pxeinstall/httpd/ospcdeploy/ospcdeploy.log@INFO
+- ** ----------   . concurrency: 8
+- ** ----------   . events:      OFF
+- *** --- * ---   . beat:        OFF
+-- ******* ----
+--- ***** ----- [Queues]
+ --------------   . celery:      exchange:celery (direct) binding:celery
+                  
+
+[Tasks]
+  . ospcdeploy.hosts.tasks.deploy
+  . ospcdeploy.hosts.tasks.puppet_clean
+  . ospcdeploy.hosts.tasks.puppet_run
+[2012-11-03 00:39:03,642: INFO/PoolWorker-1] child process calling self.run()
+[2012-11-03 00:39:03,643: INFO/PoolWorker-2] child process calling self.run()
+[2012-11-03 00:39:03,645: INFO/PoolWorker-3] child process calling self.run()
+[2012-11-03 00:39:03,647: INFO/PoolWorker-4] child process calling self.run()
+[2012-11-03 00:39:03,650: INFO/PoolWorker-5] child process calling self.run()
+[2012-11-03 00:39:03,652: INFO/PoolWorker-6] child process calling self.run()
+[2012-11-03 00:39:03,655: INFO/PoolWorker-7] child process calling self.run()
+[2012-11-03 00:39:03,658: INFO/PoolWorker-8] child process calling self.run()
+[2012-11-03 00:39:03,658: WARNING/MainProcess] celery@pxeserver.pxeserver has started.

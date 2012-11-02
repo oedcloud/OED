@@ -1,0 +1,11 @@
+# D-I config version 2.0
+#include ubuntu-installer/amd64/boot-screens/menu.cfg
+#default ubuntu-installer/amd64/boot-screens/vesamenu.c32
+
+default preseed
+label preseed
+kernel ubuntu-installer/amd64/linux
+append vga=normal initrd=ubuntu-installer/amd64/initrd.gz locale=en_US.UTF-8 debian-installer/keymap=us interface=eth0 auto=true priority=critical url=http://192.168.1.1/preseed/preseed.cfg -- quiet
+
+prompt 1
+timeout 5 

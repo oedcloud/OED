@@ -1,0 +1,191 @@
+# Create your views here.
+#from django.db.models import Q
+from django.shortcuts import render_to_response, get_object_or_404
+from forms import HostForm
+from django.template import RequestContext
+from tables import HostTable
+from models import Hosts
+from ospcdeploy.hosts.tasks import puppet_run,transfer,deploy
+from django.http import HttpResponse
+import os
+import sys
+import time
+import logging
+
+PROJ_ROOT = r"/pxeinstall/httpd/ospcdeploy/"
+abs_path = lambda p: os.path.join(PROJ_ROOT,p)
+LOG_FILE = abs_path("ospcdeploy.log")
+logger = logging.getLogger("ospcdeploy.hosts.views")
+
+'''def puppet_run(hosts):
+    logfile=LOG_FILE
+    os.system("echo 'enter puppet run' >> %s " % (LOG_FILE))
+    if not isinstance(hosts,list):
+        hosts+=".sh.intel.com"
+        os.system("puppetrun -p 10 --host %s | tee -a %s" % (hosts,logfile))
+    else:
+        for host in hosts:
+            host+=".sh.intel.com"
+            os.system("echo 'puppetrun -p 10 --host %s | tee -a %s' >> %s " % (host,logfile,logfile))
+            os.system("puppetrun -p 10 --host %s | tee -a %s" % (host,logfile))
+
+def transfer(hosts):
+    #new file transfer should be added in transfer.pp
+    #new cmd should be added in ospc.sh
+    os.system("echo 'transfering files' >> %s " % (LOG_FILE))
+    os.system("cp %s /pxeinstall/puppet/files" % abs_path("localrc"))
+    #os.system("cp %s /pxeinstall/puppet/files" % abs_path("localnc"))
+    os.system("echo 'copy localrc' >> %s " % (LOG_FILE))
+    os.system("sed -i 's/NODE/transfer/g' /etc/puppet/manifests/site.pp")
+    os.system("echo 'begin to transfer files' >> %s " % (LOG_FILE))
+    puppet_run(hosts)
+    os.system("echo 'succeeded to transfer.' >> %s " % (LOG_FILE))
+    time.sleep(250)
+    os.system("sed -i 's/transfer/NODE/g' /etc/puppet/manifests/site.pp")
+
+#for transfer localrc deploy file and execute install.sh 
+def deploy(hosts,role):
+    if role == "cc":
+        os.system("sed -i 's/NODE/cc/g' /etc/puppet/manifests/site.pp")
+        puppet_run(hosts)
+        os.system("sed -i 's/cc/NODE/g' /etc/puppet/manifests/site.pp")
+    elif role == "nc":
+        os.system("sed -i 's/NODE/nc/g' /etc/puppet/manifests/site.pp")
+        puppet_run(hosts)
+        os.system("sed -i 's/nc/NODE/g' /etc/puppet/manifests/site.pp")
+    else:
+        pass
+'''		
+
+def ospcdeploy(request):    
+    extras = []
+    #hosts = get_object_or_404(Hosts,hostname=request.POST['hostname'])
+    if request.method == 'POST':
+        # submit to setting the roles of the hosts
+        #logger.info("To update the Hostform.")
+        post = request.POST
+        if 'update' in post:
+            logs = readlog()
+            try:
+                logger.info("To update the Hostform.")
+                host = Hosts.objects.get(hostname=post['hostname'])
+                form = HostForm(request.POST,instance=host)
+                if form.is_valid():
+                    logger.info("Hosts has been updated.")
+                    form.save()
+            except Hosts.DoesNotExist:
+                form = HostForm()
+                logger.warning("Hostname doesnot exists.")
+
+
+        # make the config file in the project root for CC and NC (localrc and localnc) 
+        if 'config' in post:
+            logger.info("To configure localrc and localnc.")
+            hosts = Hosts.objects.exclude(role='').order_by('role')
+            form = HostForm()
+            if hosts.count() > 0:
+                extras = configuration(hosts)
+
+        # deployment phase can be divided into 2 parts: transportation and execution
+        if 'deploy' in post:
+            logs = None
+            cc = []
+            nc = []
+            host_map = {}
+            form = HostForm()
+            logger.info("To deploy the client hosts.")
+            hosts = Hosts.objects.exclude(role='').order_by('role')
+            if hosts.count() > 0:
+                for host in hosts:
+                    if host.role == '1': 
+                        cc.append(host.hostname)
+                    if host.role =='2':
+                        nc.append(host.hostname)
+                if len(cc):
+                    host_map["cc"] = cc
+                    host_map["nc"] = nc
+                    deploy.delay(host_map)
+                    logger.info("trigger tasks.")
+                else:
+                    logs = "There is no cc defined."                        
+            else: 
+                logs = "No hosts got configured."
+            if logs == None:
+                logs = readlog()
+    else:
+        form = HostForm()
+    
+    # bind the object to table
+    init_queryset = Hosts.objects.all()
+    table = HostTable(
+            init_queryset,
+            order_by=request.GET.get('sort','hostname'))
+
+    return render_to_response('ospcdeploy.html',locals(),RequestContext(request))
+
+
+def configuration(hosts):
+    extras = []
+    cc = ''
+    nc = []
+    #get_root = lambda p: os.path.join(PROJ_ROOT,p)
+    for host in hosts:
+        if host.role == '1':
+            cc = host.dhcp_ip
+            try:
+                with open(abs_path('localrc'),'w') as cc_file:
+                    extra = '''HOST_IP=%s
+MULTI_HOST=1
+MYSQL_PASS=nova
+RABBIT_PASS=nova
+SERVICE_TOKEN=nova''' % cc
+                    cc_file.write(extra)
+                    extras.append(extra)
+            except IOError:
+                extras.append("Error: can\'t find file or read data %s" % os.getcwd())
+         
+        if host.role == '2':
+            if cc == '':
+                extras.append("Error: can\'t find CC")
+            else:
+                nc.append(host.dhcp_ip)
+                try:
+                    with open(abs_path('localnc'),'w') as nc_file:
+                        extra = '''HOST_IP=%s
+MULTI_HOST=1
+MYSQL_PASS=nova
+RABBIT_PASS=nova
+SERVICE_TOKEN=nova
+MYSQL_HOST=%s
+RABBIT_HOST=%s
+GLANCE_HOSTPORT=%s:9292
+ENABLED_SERVICES=n-cpu,n-net,n-novnc,n-xvnc''' % (host.dhcp_ip, cc, cc, cc)
+                        nc_file.write(extra)
+                        extras.append(extra)        
+                except IOError:
+                    extras.append("Error: can\'t find file or read data %s" % get_root('localnc'))
+    return extras
+
+
+def readlog():
+    BUF_SIZE = 1024
+    try:
+        with open(LOG_FILE,'r') as log:
+            logs = log.read()
+    except IOError:
+        logs = "Error: can\'t find log file"
+    return logs
+
+def getlog(request):
+    #log_dir = os.path.join(PROJ_ROOT,'syslog')
+    logs = readlog()
+   # return render_to_response('getlog.html',locals(),RequestContext(request))
+    return HttpResponse(logs)
+
+def hostview(request):
+    init_queryset = Hosts.objects.all()
+    table = HostTable(
+            init_queryset,
+            order_by=request.GET.get('sort','hostname'))
+
+    return render_to_response('table.html',{'table': table},RequestContext(request))

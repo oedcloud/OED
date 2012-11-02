@@ -1,0 +1,12 @@
+# default: on
+# description: nc_listen
+service nc_listen
+{
+  port		= 3336
+  socket_type	= stream
+  protocol	= tcp
+  wait		= no
+  user		= root
+  server	= /pxeinstall/httpd/ospcdeploy/nc_listen.sh
+  disable	= no
+}

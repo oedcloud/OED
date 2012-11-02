@@ -1,0 +1,155 @@
+# Create your views here.
+#from django.db.models import Q
+from django.shortcuts import render_to_response, get_object_or_404
+from forms import HostForm
+from django.template import RequestContext
+from tables import HostTable
+from models import Hosts
+
+import os
+import sys
+import time
+
+def puppet_run(hosts):
+    if not isinstance(hosts,list):
+        os.system("puppetrun -p 10 --host %s" % (hosts))
+    else:
+        for host in hosts:
+            os.system("puppetrun -p 10 --host %s" % (host))
+
+def transfer(hosts):
+    #new file transfer should be added in transfer.pp
+    #new cmd should be added in ospc.sh
+    #os.system("cp /opt/ospcdeploy/localrc /etc/puppet/files")
+    #os.system("cp /opt/ospcdeploy/localnc /etc/puppet/files")
+    os.system("sed -i 's/NODE/transfer/g' /etc/puppet/manifests/site.pp")
+    puppet_run(hosts)
+    time.sleep(250)
+    os.system("sed -i 's/transfer/NODE/g' /etc/puppet/manifests/site.pp")
+
+#for transfer localrc deploy file and execute install.sh 
+#def deploy():
+#    os.system("cp /opt/ospcdeploy/localrc /etc/puppet/files")
+#    os.system("cp /opt/ospcdeploy/localnc /etc/puppet/files")
+    
+
+def ospcdeploy(request):    
+    extras = []
+    #hosts = get_object_or_404(Hosts,hostname=request.POST['hostname'])
+    if request.method == 'POST':
+        post = request.POST
+        if 'update' in post:
+            try:
+                host = Hosts.objects.get(hostname=post['hostname'])
+                form = HostForm(request.POST,instance=host)
+                if form.is_valid():
+                    form.save()
+            except Hosts.DoesNotExist:
+                form = HostForm()
+
+        if 'config' in post:
+            hosts = Hosts.objects.exclude(role='').order_by('role')
+            form = HostForm()
+            if hosts.count() > 0:
+                extras = configuration(hosts)
+
+        if 'deploy' in post:
+            form = HostForm()
+            logs = 'hello world'
+            '''cc = ''
+            nc = []
+            for host in hosts:
+                if host.role == '1':
+                    cc = host.dhcp_ip   
+                    try:
+                        with open(r'/opt/ospcdeploy/localrc','w') as cc_file:
+                            extra = "HOST_IP=" + cc + '\n' + "MULTI_HOST=1\nMYSQL_PASS=nova\nRABBIT_PASS=nova\nRABBIT_PASS=nova\n")
+                            cc_file.write(extra)
+                            #cc_file.write('HOST_IP=' + cc + '\n')
+                            #cc_file.write("MULTI_HOST=1\nMYSQL_PASS=nova\nRABBIT_PASS=nova\nRABBIT_PASS=nova\n")
+                    except IOError:
+                        print "Error: can\'t find file or read data"
+                if host.role == '2':
+                    if cc == '':
+                        print "Error: can\'t find file or read data"
+                    else:
+                        nc.append(host.dhcp_ip)
+                        try:
+                            with open(r'/opt/ospcdeploy/localnc','w') as nc_file:
+                                extra = "HOST_IP=" + host.dhcp_ip + "\n" 
+                                nc_file.write("HOST_IP=" + host.dhcp_ip + "\n")
+                                nc_file.write("MULTI_HOST=1\nMYSQL_PASS=nova\nRABBIT_PASS=nova\nRABBIT_PASS=nova\n")
+                                nc_file.write("MYSQL_HOST=" + cc + "\n")
+                                nc_file.write("RABBIT_HOST=" + cc + "\n")
+                                nc_file.write("GLANCE_HOSTPORT=" + cc + ":9292\n")
+                                nc_file.write("ENABLED_SERVICES=n-cpu,n-net,n-novnc,n-xvnci\n")
+                        except IOError:
+                            print "Error: can\'t find file or read data"'''
+
+    else:
+        form = HostForm()
+    
+    init_queryset = Hosts.objects.all()
+    table = HostTable(
+            init_queryset,
+            order_by=request.GET.get('sort','hostname'))
+
+    return render_to_response('ospcdeploy.html',locals(),RequestContext(request))
+
+
+def configuration(hosts):
+    extras = []
+    cc = ''
+    nc = []
+    for host in hosts:
+        if host.role == '1':
+            cc = host.dhcp_ip
+            try:
+                with open(r'/opt/ospcdeploy/localrc','w') as cc_file:
+                    extra = '''HOST_IP=%s
+MULTI_HOST=1
+MYSQL_PASS=nova
+RABBIT_PASS=nova
+RABBIT_PASS=nova''' % cc
+                    cc_file.write(extra)
+                    extras.append(extra)
+                            #cc_file.write('HOST_IP=' + cc + '\n')
+                            #cc_file.write("MULTI_HOST=1\nMYSQL_PASS=nova\nRABBIT_PASS=nova\nRABBIT_PASS=nova\n")
+            except IOError:
+                print "Error: can\'t find file or read data"
+         
+        if host.role == '2':
+            if cc == '':
+                print "Error: can\'t find cc"
+            else:
+                nc.append(host.dhcp_ip)
+                try:
+                    with open(r'/opt/ospcdeploy/localnc','w') as nc_file:
+                        extra = '''HOST_IP=%s
+MULTI_HOST=1
+MYSQL_PASS=nova
+RABBIT_PASS=nova
+RABBIT_PASS=nova
+MYSQL_HOST=%s
+GLANCE_HOSTPORT=%s
+ENABLED_SERVICES=n-cpu,n-net,n-novnc,n-xvnci''' % (host.dhcp_ip, cc, cc)
+                        nc_file.write(extra)
+                        extras.append(extra)        
+                                #nc_file.write("HOST_IP=" + host.dhcp_ip + "\n")
+                                #nc_file.write("MULTI_HOST=1\nMYSQL_PASS=nova\nRABBIT_PASS=nova\nRABBIT_PASS=nova\n")
+                                #nc_file.write("MYSQL_HOST=" + cc + "\n")
+                                #nc_file.write("RABBIT_HOST=" + cc + "\n")
+                                #nc_file.write("GLANCE_HOSTPORT=" + cc + ":9292\n")
+                                #nc_file.write("ENABLED_SERVICES=n-cpu,n-net,n-novnc,n-xvnci\n")
+                except IOError:
+                    print "Error: can\'t find file or read data"
+    return extras
+
+
+def hostview(request):
+    init_queryset = Hosts.objects.all()
+    table = HostTable(
+            init_queryset,
+            order_by=request.GET.get('sort','hostname'))
+
+    return render_to_response('table.html',{'table': table},RequestContext(request))

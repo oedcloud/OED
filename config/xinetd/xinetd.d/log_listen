@@ -1,0 +1,12 @@
+# default: on
+# description: log_listen
+service log_listen
+{
+  port		= 3337
+  socket_type	= stream
+  protocol	= tcp
+  wait		= no
+  user		= root
+  server	= /pxeinstall/httpd/ospcdeploy/log_listen.sh
+  disable	= yes
+}

@@ -1,0 +1,240 @@
+# Create your views here.
+#from django.db.models import Q
+from django.shortcuts import render_to_response, get_object_or_404
+from forms import HostForm
+from django.template import RequestContext
+from tables import HostTable
+from models import Hosts
+from ospcdeploy.hosts.tasks import puppet_run,transfer,deploy
+from django.http import HttpResponse
+import mmap
+import os
+import sys
+import time
+import logging
+
+PROJ_ROOT = r"/pxeinstall/httpd/ospcdeploy/"
+abs_path = lambda p: os.path.join(PROJ_ROOT,p)
+LOG_FILE = abs_path("ospcdeploy.log")
+logger = logging.getLogger("ospcdeploy.hosts.views")
+
+
+def ospcdeploy(request):    
+    extras = []
+    #hosts = get_object_or_404(Hosts,hostname=request.POST['hostname'])
+    if request.method == 'POST':
+        # submit to setting the roles of the hosts
+        #logger.info("To update the Hostform.")
+        post = request.POST
+        if 'update' in post:
+            #logs = readlog()
+            try:
+                logger.info("To update the Hostform.")
+                host = Hosts.objects.get(hostname=post['hostname'])
+                form = HostForm(request.POST,instance=host)
+                if form.is_valid():
+                    logger.info("Hosts has been updated.")
+                    form.save()
+            except Hosts.DoesNotExist:
+                form = HostForm()
+                logger.warning("Hostname doesnot exists.")
+
+
+        # make the config file in the project root for CC and NC (localrc and localnc) 
+        if 'config' in post:
+            logger.info("To configure localrc and localnc.")
+            hosts = Hosts.objects.exclude(role='').order_by('role')
+            form = HostForm()
+            if hosts.count() > 0:
+                confs = configuration(hosts)
+                extras = "-----------CC Config-----------\n"
+                extras += confs[0] 
+                if confs[1]:
+                    extras += "\n-----------NC Config-----------\n"
+                for conf in confs[1:]:
+                    extras += conf
+
+        # deployment phase can be divided into 2 parts: transportation and execution
+        if 'deploy' in post:
+            logs = None
+            cc = []
+            nc = []
+            host_map = {}
+            form = HostForm()
+            logger.info("To deploy the client hosts.")
+            hosts = Hosts.objects.exclude(role='').order_by('role')
+            if hosts.count() > 0:
+                for host in hosts:
+                    if host.role == '1': 
+                        cc.append(host.hostname)
+                    if host.role =='2':
+                        nc.append(host.hostname)
+                if len(cc):
+                    flag = 0
+                    if os.path.exists(abs_path("localrc")):
+                        host_map["cc"] = cc
+                    else:
+                        flag = 1
+                        logger.error("The config file localrc does not exists, plz generate the config file first.")
+                        logs = "The config file localrc does not exists, plz generate the config file first."
+                    if os.path.exists(abs_path("localnc")):
+                        host_map["nc"] = nc
+                    else:
+                        flag = 1
+                        logger.error("The config file localnc does not exists, plz generate the config file first.")
+                        logs = "The config file localnc does not exists, plz generate the config file first."
+                    if flag == 0:
+                        deploy.delay(host_map)
+                        logger.info("tasks triggered.")
+                else:
+                    logs = "There is no cc defined."                        
+            else: 
+                logs = "No hosts got configured."
+            if logs == None:
+                logs = readlog()
+       
+        if 'single-config' in post:
+            logger.info("To configure localrc and localnc for single host.")
+            try:
+                cc = Hosts.objects.get(role='1')
+                host = Hosts.objects.filter(hostname=post['hostname'])
+                confs = configuration(host, cc.dhcp_ip)
+                extras = "-----------NC Config-----------\n"
+                extras += confs[0]
+                    
+            except Hosts.DoesNotExist:
+                extras = "Error: can\'t find CC"
+                logger.error("CC doesnot exists.")
+            form = HostForm()
+        
+        if 'single-deploy' in post:
+            logger.info("To deploy compute node %s" % post['hostname'])
+            form = HostForm()
+            host_map = {}
+            logs = None
+            try:
+                logger.info("Begin deploy compute node %s" % post['hostname'])
+                host = Hosts.objects.get(hostname=post['hostname'])
+                flag = 0
+                if host.role == '1':
+                    if os.path.exists(abs_path("localrc")):
+                        logger.info("CC host %s" % host.hostname)
+                        cc = []
+                        cc.append(host.hostname)
+                        host_map["cc"] = cc
+                    else:
+                        flag = 1
+                        logger.error("The config file localrc does not exists, plz generate the config file first.")
+                        logs = "The config file localrc does not exists, plz generate the config file first."
+                if host.role == '2':    
+                    if os.path.exists(abs_path("localnc")):
+                        host_map["nc"] = host.hostname
+                        nc = []
+                        nc.append(host.hostname)
+                        host_map["nc"] = nc
+                    else:
+                        flag = 1
+                        logger.error("The config file localnc does not exists, plz generate the config file first.")
+                        logs = "The config file localnc does not exists, plz generate the config file first."    
+                
+                if flag == 0:
+                    deploy.delay(host_map)
+                    logger.info("single task triggered.")
+                
+            except Hosts.DoesNotExist:
+                logs = "The host is invalid."
+            if logs == None:
+                logs = readlog()      
+ 
+    else:
+        form = HostForm()
+    
+    # bind the object to table
+    init_queryset = Hosts.objects.all()
+    table = HostTable(
+            init_queryset,
+            order_by=request.GET.get('sort','hostname'))
+
+    return render_to_response('ospcdeploy.html',locals(),RequestContext(request))
+
+
+def configuration(hosts,cc=None):
+    extras = []
+    nc = []
+    #get_root = lambda p: os.path.join(PROJ_ROOT,p)
+    for host in hosts:
+        if host.role == '1':
+            cc = host.dhcp_ip
+            try:
+                with open(abs_path('localrc'),'w') as cc_file:
+                    extra = '''HOST_IP=%s
+MULTI_HOST=1
+MYSQL_PASS=nova
+RABBIT_PASS=nova
+SERVICE_TOKEN=nova''' % cc
+                    cc_file.write(extra)
+                    extras.append(extra)
+            except IOError:
+                extras.append("Error: can\'t find file or read data %s" % os.getcwd())
+         
+        if host.role == '2':
+            if cc == None:
+                extras.append("Error: can\'t find CC")
+            else:
+                nc.append(host.dhcp_ip)
+                try:
+                    with open(abs_path('localnc'),'w') as nc_file:
+                        extra = '''HOST_IP=%s
+MULTI_HOST=1
+MYSQL_PASS=nova
+RABBIT_PASS=nova
+SERVICE_TOKEN=nova
+MYSQL_HOST=%s
+RABBIT_HOST=%s
+GLANCE_HOSTPORT=%s:9292
+ENABLED_SERVICES=n-cpu,n-net,n-novnc,n-xvnc''' % (host.dhcp_ip, cc, cc, cc)
+                        nc_file.write(extra)
+                        extras.append(extra)        
+                except IOError:
+                    extras.append("Error: can\'t find file or read data %s" % get_root('localnc'))
+    return extras
+
+def tail(filename, n):
+    """Returns last n lines from the filename. No exception handling"""
+    size = os.path.getsize(filename)
+    with open(filename, "rb") as f:
+        # for Windows the mmap parameters are different
+        fm = mmap.mmap(f.fileno(), 0, mmap.MAP_SHARED, mmap.PROT_READ)
+        try:
+            for i in xrange(size - 1, -1, -1):
+                if fm[i] == '\n':
+                    n -= 1
+                    if n == -1:
+                        break
+            return fm[i + 1 if i else 0:].splitlines()
+        finally:
+            fm.close()
+
+def readlog():
+    logs = ''
+    try: 
+        lines = tail(LOG_FILE,50)
+        for line in reversed(lines):
+             logs += line + '\n'
+    except IOError:
+        logs = "Error: can\'t find log file"
+    return logs
+
+def getlog(request):
+    #log_dir = os.path.join(PROJ_ROOT,'syslog')
+    logs = readlog()
+   # return render_to_response('getlog.html',locals(),RequestContext(request))
+    return HttpResponse(logs)
+
+def hostview(request):
+    init_queryset = Hosts.objects.all()
+    table = HostTable(
+            init_queryset,
+            order_by=request.GET.get('sort','hostname'))
+
+    return render_to_response('table.html',{'table': table},RequestContext(request))

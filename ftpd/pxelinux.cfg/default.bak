@@ -1,0 +1,11 @@
+# D-I config version 2.0
+#include ubuntu-installer/amd64/boot-screens/menu.cfg
+#default ubuntu-installer/amd64/boot-screens/vesamenu.c32
+
+default preseed
+label preseed
+kernel ubuntu-installer/amd64/linux
+append vga=normal locale=en_US setup/ask_detect=false setup/layoutcode=en initrd=ubuntu-installer/amd64/initrd.gz netcfg/choose_interface=eth1 preseed/url=http://192.168.1.1/preseed/preseed.cfg --
+
+prompt 1
+timeout 5 

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <title>OSPC Deployment</title>
+</head>
+
+{% if logs %}
+<script type="text/javascript" charset="utf-8" src="script/jquery.min.js"></script>
+<script>
+   $(function() {
+        function getLog() {
+          $.get("/ospcdeploy/getlog/", function(data) {
+            $("#deploylog").html(data);
+          });
+        }
+        getLog();
+
+        setInterval(function() {
+          getLog();
+        }, 3);
+      });
+</script>
+{% endif %}
+
+</script>
+<body>
+    <h1>OSPC Deployment</h1>
+    <form action="." method="POST">
+      {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <p><input type="submit" name="update" value="Submit">  <input type="submit" name="config" value="Configuration">  <input type="submit" name="deploy" value="Deploy"></p>        
+    {% if extras %}
+        <p> Config files: </p>
+        <textarea cols="80" rows="10" name="comment">
+        {% for extra in extras %}
+            {% if forloop.first %}
+--------- CC Config ---------
+            {% else %}
+--------- NC Config ---------
+            {% endif %}
+{{ extra }}
+            {% empty %} <br/>
+        {% endfor %}  
+        </textarea>
+    {% endif %}  
+    </form>
+<!-- CSS goes in the document HEAD or added to your external stylesheet -->
+<style type="text/css">
+table.hovertable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table.hovertable th {
+	background-color:#c3dde0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+table.hovertable tr {
+	background-color:#d4e3e5;
+}
+table.hovertable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #a9c6c9;
+}
+</style>
+
+<!-- Table goes in the document BODY -->
+<br/>
+ <table class="hovertable">
+    <thead>
+    <tr>
+      {% for column in table.columns %}
+      <th>
+        {% if column.sortable %}
+          <a href="?sort={{ column.name_toggled }}"> {{ column }}</a>
+          {% if column.is_ordered_reverse %}
+            <img src="up.png" />
+          {% else %}
+            <img src="down.png" />
+          {% endif %}
+        {% else %}
+          {{ column }}
+        {% endif %}
+      </th>
+      {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in table.rows %}
+      <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
+        <td>{{row.data.hostname}}</td>
+        <td>{{row.data.static_ip}}</td>
+        <td>{{row.data.dhcp_ip}}</td>
+        <td>{{row.data.timestamp}}</td>
+        <td>{{row.data.get_role_display}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot></tfoot>
+    </table>
+    {% if logs %}
+       <textarea cols="80" rows="10" name="logs" id="deploylog">{{ logs }}</textarea>
+    {% endif %}
+</body>
+</html>
