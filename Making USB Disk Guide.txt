@@ -1,0 +1,49 @@
+How to make OED usb disk, version 1.0
+
+Date: November 20th, 2012
+
+So far making usb disk has been verfied on Ubuntu11.10. Here is the steps:
+
+1.Install Ubuntu11.10 in USB disk;
+
+2.Create /pxeinstall direcroty;
+
+3. Download the Source code from github:
+	git clone https://github.com/oedcloud/OED.git 
+
+4.Install modules listed below:
+	dnsmasq: 2.57-1ubuntu1, xinetd: 1.3.1-1, apache2: 2.2.20-1ubuntu1.2, puppet: 2.7.1-1ubuntu3.5,  celery:2.6.0a1
+	1)Install dnsmasq: apt-get install dnsmasq
+	2)Install xinetd: apt-get install xinetd
+	3)Install apache2: apt-get install apache2
+	4)Install puppet: apt-get install puppet,puppetmaster
+	5)Install ntp: apt-get install ntp
+	6)Install Celery: pip install Celery
+			  
+5. Configure the above modules as below:
+	1)dnsmasq
+		Edit /etc/dnsmasq.conf and refer to /pxeinstall/config/dnsmasq/dnsmasq.conf
+	2)xinetd module
+		Add log_listen and nc_listen to /etc/xinetd.d/ and refer to /pxeinstall/config/xinetd/xinetd.d/log_listen & nc_listen
+	3)apache2 module
+		Edit /etc/apache2/httpd.conf and refer to /pxeinstall/config/apache2/httpd.conf
+	4)puppet module
+		Edit /etc/puppet/auth.conf and refer to /pxeinstall/config/puppet/auth.conf
+		Edit /etc/puppet/fileserver.conf and refer to /pxeinstall/config/puppet/fileserver.conf
+	5)ntp module
+		Edit /etc/ntp.conf and refer to /pxeinstall/config/ntp/ntp.conf
+	6)celery module
+		It is not very convenient to have Celery run manually all the time. After all, a server reboot wouldn¡¯t bring it up again. Therefore it is desirable to have Celery run as an automatically started as a daemon. You need to to do the following: 
+		a.Firstly, get the following file:
+			https://github.com/ask/celery/blob/master/contrib/generic-init.d/celeryd
+			Copy it to the folder /etc/init.d/ and mark it executable. 
+		b.Then, create a default configuration file /etc/default/celeryd(taken from the Celery documentation). You can refer to /pxeinstall/config/celery/celeryd
+		c.Finally, you have to tell the system about the new init script:
+			sudo update-rc.d celeryd defaults
+
+End of Document
+		
+        
+
+	
+
