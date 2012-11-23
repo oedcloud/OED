@@ -10,7 +10,7 @@ Definition and Preparation
 * Client Server: Client machines. By default these clients have double network cards. One connects to company network and gets IP address through DHCP. The other obtains static IP address from PXE Server.
 * Switch: PXE Server and Client Server mutually connect via switch.
 * Lots of network cables
-* USB startup disk: Making USB flash disk from image or ospcdeploy source code (https://sh-svn.sh.intel.com/itflex_repos/svn_ospc/ospc/pxeinstall).
+* USB startup disk: Making USB flash disk from image or ospcdeploy source code (git clone https://github.com/oedcloud/OED.git).You can refer to Making USB Disk Guide.
 Steps
 1.  Booting PXE Server from USB flash disk.
 2.  Running startup.sh script by typing below commands:
